@@ -1,0 +1,487 @@
+/* ========================================
+   UNIVERSITY STAFF PROFILING SYSTEM
+   My CSC 208 Project - White & Red Theme CSS
+   ======================================== */
+
+/* CSS Variables - Basically like setting up colors once and using them everywhere */
+:root {
+  /* My new color scheme - white and red theme that looks professional */
+  --bg: #f8f9fa;                    /* Main background - light grayish white */
+  --card: #ffffff;                  /* Card backgrounds - pure white */
+  --muted: #6c757d;                 /* Muted text - gray for less important stuff */
+  --text: #212529;                  /* Main text - dark gray/black */
+  --accent: #911F0F;                /* Primary accent - deep red for buttons and focus */
+  --accent-2: #dc3545;              /* Secondary accent - brighter red for variety */
+  --accent-3: #e9ecef;              /* Tertiary accent - light gray for subtle elements */
+  --danger: #dc3545;                /* Error states - red for when things go wrong */
+  --ring: rgba(145,31,15,.3);       /* Focus ring - red glow when you click on inputs */
+  
+  /* Visual effects to make things look nice */
+  --shadow: 0 4px 20px rgba(0,0,0,.1);  /* Card shadows - lighter for white theme */
+  --radius: 18px;                   /* Border radius - makes corners rounded */
+}
+
+/* ========================================
+   BASIC STYLES - The foundation stuff
+   ======================================== */
+
+/* Box sizing - this makes padding and borders work the way I expect them to */
+* {
+  box-sizing: border-box;
+}
+
+/* Make sure the page takes up the full height */
+html, body {
+  height: 100%;
+}
+
+/* Main body styling - clean white background with subtle gradients */
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: 
+    /* Subtle gradients for depth without being too dark */
+    radial-gradient(1200px 800px at 10% -10%, rgba(145,31,15,.05), transparent),
+    radial-gradient(1000px 600px at 110% 10%, rgba(220,53,69,.03), transparent),
+    var(--bg);
+  line-height: 1.45;
+}
+
+/* ========================================
+   LAYOUT STUFF - How things are arranged
+   ======================================== */
+
+/* Container - keeps everything centered and not too wide */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Header - stays at the top when you scroll (sticky positioning) */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: saturate(140%) blur(8px);  /* This creates that cool glass effect */
+  background: var(--accent);
+  border-bottom: 1px solid rgba(145,31,15,.1);
+  color: #ffffff;
+}
+
+/* Header content - flexbox to arrange logo and title side by side */
+.header-inner {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 24px;
+  
+}
+
+/* University logo - now it's an actual image */
+.logo {
+  height: 50px;
+  width: 200px;
+  object-fit: contain;
+}
+
+/* Main heading - responsive sizing so it looks good on all screens */
+h1 {
+  font-size: clamp(18px, 2.2vw, 28px);  /* This makes text scale with screen size */
+  margin: 0;
+  letter-spacing: .2px;
+}
+
+/* Subtle text - for less important descriptions */
+.subtle {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ========================================
+   GRID SYSTEM - CSS Grid is amazing!
+   ======================================== */
+
+/* Base grid - just a simple grid with some spacing */
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+/* Two-column layout - form takes up a bit more space than the profile */
+.two-col {
+  grid-template-columns: 1.1fr .9fr;  /* Form is slightly wider than profile */
+}
+
+/* Mobile responsive - stack everything in one column on small screens */
+@media (max-width: 980px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   CARD COMPONENTS - The main content boxes
+   ======================================== */
+
+/* Main card styling - clean white cards with subtle borders */
+.card {
+  background: var(--card);
+  border: 1px solid rgba(145,31,15,.1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Card headings - responsive text size */
+.card h2 {
+  margin: 0 0 6px;
+  font-size: clamp(18px, 1.8vw, 22px);
+}
+
+/* Card content padding - gives some breathing room */
+.card .content {
+  padding: 20px;
+}
+
+/* ========================================
+   FORM LAYOUT SYSTEM
+   ======================================== */
+
+/* 12-column grid system for form fields */
+.row {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+/* Field sizing classes */
+.field {
+  grid-column: span 12;  /* Full width by default */
+}
+
+.field.half {
+  grid-column: span 6;   /* Half width */
+}
+
+.field.third {
+  grid-column: span 4;   /* One-third width */
+}
+
+/* Form labels with icons and hints */
+.label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 14px;
+  margin: 4px 0 6px;
+}
+
+/* Helper text styling */
+.hint {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ========================================
+   FORM INPUTS
+   ======================================== */
+
+/* All input types with consistent styling */
+input[type="text"], 
+input[type="email"], 
+input[type="tel"], 
+input[type="url"], 
+input[list], 
+textarea, 
+select {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(145,31,15,.2);
+  background: var(--card);
+  color: var(--text);
+  padding: 12px 14px;
+  outline: none;
+  font-size: 15px;
+  transition: .2s border, .2s box-shadow;
+}
+
+/* Textarea specific styling */
+textarea {
+  min-height: 110px;
+  resize: vertical;  /* Allow vertical resizing only */
+}
+
+/* Focus states with accent color and ring effect */
+input:focus, 
+select:focus, 
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 6px var(--ring);
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+/* Base button styling */
+.btn {
+  appearance: none;
+  border: none;
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: .2px;
+}
+
+/* Primary button with gradient */
+.btn.primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #ffffff;
+}
+
+/* Ghost button with border */
+.btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(145,31,15,.3);
+  color: var(--text);
+}
+
+/* Subtle button for secondary actions */
+.btn.subtle {
+  background: var(--accent-3);
+  color: var(--text);
+}
+
+/* Full-width button */
+.btn.bar {
+  width: 100%;
+}
+
+/* Button focus state */
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 6px var(--ring);
+}
+
+/* ========================================
+   TOOLBAR & UTILITIES
+   ======================================== */
+
+/* Toolbar for grouping related buttons */
+.toolbar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ========================================
+   TAG INPUT SYSTEM
+   ======================================== */
+
+/* Container for tags with dashed border */
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px dashed rgba(145,31,15,.2);
+}
+
+/* Individual tag styling */
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: var(--accent-3);
+  font-size: 13px;
+}
+
+/* Tag remove button */
+.tag button {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+/* ========================================
+   SKILLS DISPLAY
+   ======================================== */
+
+/* Skills row layout */
+.skill-row {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Progress bar container */
+.skill-progress {
+  height: 9px;
+  background: var(--accent-3);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Progress bar fill with gradient */
+.skill-progress > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+/* ========================================
+   PROFILE LAYOUT
+   ======================================== */
+
+/* Profile section with avatar and content */
+.profile {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+}
+
+/* Responsive profile layout */
+@media (max-width: 880px) {
+  .profile {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Avatar styling with aspect ratio */
+.avatar {
+  width: 100%;
+  aspect-ratio: 1/1;  /* Square aspect ratio */
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(145,31,15,.2);
+  background: var(--accent-3);
+  display: grid;
+  place-items: center;
+}
+
+/* Avatar image styling */
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Profile statistics */
+.stat {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* List of items (tags, skills, etc.) */
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ========================================
+   FOOTER & DIVIDERS
+   ======================================== */
+
+/* Page footer */
+footer {
+  margin-top: 30px;
+  padding: 18px 22px;
+  border-top: 1px dashed rgba(145,31,15,.2);
+  color: var(--muted);
+}
+
+/* Visual divider line */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(145,31,15,.1), rgba(145,31,15,.05));
+  margin: 14px 0;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Error message styling */
+.error {
+  color: var(--danger);
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+/* Hide elements */
+.hidden {
+  display: none;
+}
+
+/* Pill-shaped badges */
+.pill {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--accent-3);
+  font-size: 12px;
+}
+
+/* Icon sizing */
+.icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+}
+
+/* ========================================
+   SOCIAL MEDIA LINKS
+   ======================================== */
+
+/* Social media container */
+.socials {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Individual social media link */
+.socials a {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--accent-3);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  border: 1px solid rgba(145,31,15,.1);
+}
+
+/* Social media icons */
+.socials svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ========================================
+   KEYBOARD SHORTCUTS
+   ======================================== */
+
+/* Keyboard key styling for shortcuts */
+.kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: var(--accent-3);
+  border: 1px solid rgba(145,31,15,.2);
+  border-bottom-width: 3px;
+  padding: 2px 6px;
+  border-radius: 6px;
+}

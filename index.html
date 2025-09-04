@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic HTML5 meta tags for proper document structure -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>University Staff Profiling – CSC 208</title>
+  
+  <!-- External stylesheet for organized CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- ========================================
+       PAGE HEADER - This stays at the top when you scroll
+       ======================================== -->
+  <header>
+    <div class="header-inner container ">
+      <!-- Just a simple "U" logo with a cool gradient -->
+       <a href="landing.html">  <img src="eksulogo.png" alt="University Logo" class="logo"></a> 
+      <!-- <img src="eksulogo.png" alt="University Logo" class="logo"> -->
+      <div>
+        <h1>University Staff Profiling Form</h1>
+        <div class="subtle">CSC 208 – HTML • CSS • Basic JavaScript (Auto‑generates a profile page below)</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================
+       MAIN CONTENT AREA - Two columns side by side
+       ======================================== -->
+  <main class="container grid two-col" id="top">
+    
+    <!-- ========================================
+         STAFF PROFILING FORM SECTION - The main form
+         ======================================== -->
+    <section class="card" aria-labelledby="formTitle">
+      <div class="content">
+        <h2 id="formTitle">Staff Profiling Form</h2>
+        <p class="subtle" style="margin:0 0 10px">Fill the form carefully. Click <span class="kbd">View Generated Profile</span> anytime to jump to the profile preview.</p>
+
+        <!-- The main form - this is where all the magic happens -->
+        <form id="profileForm" action="mailto:YOUR_EMAIL_HERE@example.com" method="post" enctype="text/plain" novalidate>
+          <div class="row">
+            
+            <!-- ========================================
+                 BASIC INFORMATION SECTION - The basics
+                 ======================================== -->
+            
+            <!-- Staff Name - They have to fill this out -->
+            <div class="field half">
+              <label class="label" for="name">1) Name <span class="pill">required</span></label>
+              <input type="text" id="name" name="Name" placeholder="Surname Firstname" required />
+              <div class="error hidden" id="err-name">Please enter your name.</div>
+            </div>
+
+            <!-- Department Selection - Has a dropdown with common departments -->
+            <div class="field half">
+              <label class="label" for="department">7) Department <span class="pill">required</span></label>
+              <input type="text" id="department" name="Department" list="deptOptions" placeholder="e.g., Computer Science" required />
+              <datalist id="deptOptions">
+                <option>Computer Science</option>
+                <option>Electrical & Electronic Engineering</option>
+                <option>Mathematics</option>
+                <option>Statistics</option>
+                <option>Physics</option>
+                <option>Chemistry</option>
+                <option>Biological Sciences</option>
+                <option>Library & Information Science</option>
+                <option>Educational Technology</option>
+              </datalist>
+              <div class="error hidden" id="err-dept">Department is required.</div>
+            </div>
+
+            <!-- Personal Statement - Big text area for them to write about themselves -->
+            <div class="field">
+              <label class="label" for="bio">2) Personal Statement (About Me)</label>
+              <textarea id="bio" name="Personal Statement" placeholder="Inquisitive computer science specialist with ..."></textarea>
+            </div>
+
+            <!-- ========================================
+                 PROFESSIONAL INFORMATION SECTION - Work stuff
+                 ======================================== -->
+            
+            <!-- Areas of Specialization - This is the cool tag input thing I built -->
+            <div class="field">
+              <label class="label" for="areaInput">3) Areas of Specialization / Expertise <span class="pill">required</span></label>
+              <div class="tags" id="areasTags" aria-live="polite"></div>
+              <div class="toolbar" style="margin-top:8px">
+                <input type="text" id="areaInput" list="areaOptions" placeholder="Type an area and press Enter (e.g., Web Development)" />
+                <datalist id="areaOptions">
+                  <option>Research Specialist</option>
+                  <option>Web Development</option>
+                  <option>Data Modeling</option>
+                  <option>Integrated Research</option>
+                  <option>AI / Machine Learning</option>
+                  <option>Cloud Computing</option>
+                  <option>Human-Computer Interaction</option>
+                </datalist>
+                <button type="button" class="btn subtle" id="addAreaBtn">Add Area</button>
+              </div>
+              <div class="error hidden" id="err-areas">Add at least one area of specialization.</div>
+            </div>
+
+            <!-- Leadership Position - Dropdown with all the university positions -->
+            <div class="field half">
+              <label class="label" for="leadership">4) Leadership Position Held (auto picker)</label>
+              <select id="leadership" name="Leadership Position">
+                <option value="">None</option>
+                <option>VC</option>
+                <option>DVC</option>
+                <option>Dean</option>
+                <option>Sub-Dean</option>
+                <option>Faculty Officer</option>
+                <option>Director</option>
+                <option>HOD</option>
+                <option>Librarian</option>
+                <option>Registrar</option>
+                <option>Student Heads/President</option>
+              </select>
+            </div>
+
+            <!-- Employment Status - What kind of job they have -->
+            <div class="field half">
+              <label class="label" for="status">5) Status (auto picker)</label>
+              <select id="status" name="Status">
+                <option>Academic – Fulltime/Main</option>
+                <option>Academic – Parttime/Adjunct</option>
+                <option>Non-academic – Administrative</option>
+                <option>Non-academic – Technical/Laboratory</option>
+                <option>Non-academic – Adhoc/temporarily</option>
+                <option>Student President</option>
+              </select>
+            </div>
+
+            <!-- Welcome Address - For when they're in a leadership position -->
+            <div class="field">
+              <label class="label" for="welcome">6) Welcome Address</label>
+              <textarea id="welcome" name="Welcome Address" placeholder="Hi, I'm ..., I'm a researcher and computing strategist who ..."></textarea>
+            </div>
+
+            <!-- Staff ID - Their employee number or whatever -->
+            <div class="field half">
+              <label class="label" for="staffId">8) Staff Code / ID (optional)</label>
+              <input type="text" id="staffId" name="Staff Code/ID" placeholder="e.g., 2203044523" />
+            </div>
+
+            <!-- Profile Photo Upload - They have to upload a picture -->
+            <div class="field half">
+              <label class="label" for="photo">13) Official / Smiling Picture <span class="pill">required</span></label>
+              <input type="file" id="photo" name="Photo" accept="image/*" required />
+              <div class="error hidden" id="err-photo">Please upload an official/smiling picture.</div>
+            </div>
+
+            <!-- ========================================
+                 SKILLS & EDUCATION SECTION - Skills and school stuff
+                 ======================================== -->
+            
+            <!-- Professional Skills - This is the cool skill bar thing I made -->
+            <div class="field">
+              <label class="label">9) Professional Skills <span class="pill">Top 5</span></label>
+              <div id="skillsArea"></div>
+              <div class="toolbar" style="margin-top:8px">
+                <button type="button" class="btn subtle" id="addSkillBtn">+ Add Skill</button>
+                <span class="hint">Select a skill and set level (0–100).</span>
+              </div>
+              <datalist id="skillsOptions">
+                <option>Problem Solving</option>
+                <option>Collaboration</option>
+                <option>Work Ethics</option>
+                <option>Critical Thinking</option>
+                <option>Design Thinking</option>
+                <option>Adaptability</option>
+                <option>Management</option>
+                <option>Research</option>
+                <option>Data Analysis</option>
+                <option>Leadership</option>
+              </datalist>
+            </div>
+
+            <!-- Educational Qualifications - Where they went to school -->
+            <div class="field half">
+              <label class="label" for="degree">10) Qualification – Degree <span class="pill">required</span></label>
+              <input type="text" id="degree" name="Degree" placeholder="e.g., MSc in Computer Science" required />
+              <div class="error hidden" id="err-degree">Degree is required.</div>
+            </div>
+            <div class="field half">
+              <label class="label" for="university">10) Qualification – University <span class="pill">required</span></label>
+              <input type="text" id="university" name="University" placeholder="e.g., King's College, London" required />
+              <div class="error hidden" id="err-university">University is required.</div>
+            </div>
+            <div class="field">
+              <label class="label" for="qualification">10) Qualification – Details (optional text area)</label>
+              <textarea id="qualification" name="Qualification Details" placeholder="Summarize relevant academic background, certifications, honors ..."></textarea>
+            </div>
+
+            <!-- ========================================
+                 PERSONAL INTERESTS & MOTIVATION SECTION - Fun stuff
+                 ======================================== -->
+            
+            <!-- Personal Hobbies - Another tag input system like the skills -->
+            <div class="field">
+              <label class="label" for="hobbyInput">11) Hobbies (auto picker)</label>
+              <div class="tags" id="hobbyTags"></div>
+              <div class="toolbar" style="margin-top:8px">
+                <input type="text" id="hobbyInput" list="hobbyOptions" placeholder="Type a hobby and press Enter (e.g., Gaming)" />
+                <datalist id="hobbyOptions">
+                  <option>Gaming</option>
+                  <option>Writing</option>
+                  <option>Traveling</option>
+                  <option>Sketching</option>
+                  <option>Reading</option>
+                  <option>Public Speaking</option>
+                </datalist>
+                <button type="button" class="btn subtle" id="addHobbyBtn">Add Hobby</button>
+              </div>
+            </div>
+
+            <!-- Motivation Questions - Three questions about what motivates them -->
+            <div class="field">
+              <label class="label" for="motGroup">12a) Favorite working/association group and why?</label>
+              <textarea id="motGroup" name="Favorite Working/Association Group"></textarea>
+            </div>
+            <div class="field">
+              <label class="label" for="motResearch">12b) Favorite institutional/research discussion group and why?</label>
+              <textarea id="motResearch" name="Favorite Research Discussion Group"></textarea>
+            </div>
+            <div class="field">
+              <label class="label" for="motExperience">12c) Best life experience and why?</label>
+              <textarea id="motExperience" name="Best Life Experience"></textarea>
+            </div>
+
+            <!-- ========================================
+                 CONTACT INFORMATION SECTION - How to reach them
+                 ======================================== -->
+            
+            <!-- Primary Contact Details - Phone and email (required) -->
+            <div class="field half">
+              <label class="label" for="phone">14) Phone Number <span class="pill">required & validated</span></label>
+              <input type="tel" id="phone" name="Phone" placeholder="+234 801 234 5678" required />
+              <div class="error hidden" id="err-phone">Enter a valid phone number (10–15 digits).</div>
+            </div>
+            <div class="field half">
+              <label class="label" for="email">14) Email <span class="pill">required & validated</span></label>
+              <input type="email" id="email" name="Email" placeholder="name@example.com" required />
+              <div class="error hidden" id="err-email">Enter a valid email address.</div>
+            </div>
+
+            <!-- Social Media Links - All the social platforms -->
+            <div class="field third">
+              <label class="label" for="facebook">15) Facebook ID (optional)</label>
+              <input type="url" id="facebook" name="Facebook" placeholder="https://facebook.com/your-id" />
+            </div>
+            <div class="field third">
+              <label class="label" for="twitter">15) Twitter/X ID (optional)</label>
+              <input type="url" id="twitter" name="Twitter" placeholder="https://twitter.com/your-id" />
+            </div>
+            <div class="field third">
+              <label class="label" for="instagram">15) Instagram ID (optional)</label>
+              <input type="url" id="instagram" name="Instagram" placeholder="https://instagram.com/your-id" />
+            </div>
+            <div class="field third">
+              <label class="label" for="youtube">15) YouTube ID (optional)</label>
+              <input type="url" id="youtube" name="YouTube" placeholder="https://youtube.com/@your-id" />
+            </div>
+
+            <!-- ========================================
+                 FORM ACTIONS SECTION - The buttons at the bottom
+                 ======================================== -->
+            
+            <!-- Action buttons - Load example data, view profile, submit form -->
+            <div class="field" style="display:flex; gap:12px; flex-wrap:wrap">
+              <button type="button" class="btn ghost" id="loadExample">Load Example Data</button>
+              <button type="button" class="btn primary" id="viewProfile">View Generated Profile</button>
+              <button class="btn subtle" type="submit" title="Posts to your email client via mailto">Submit via Email</button>
+            </div>
+
+            <div class="hint">Note: Replace <span class="kbd">YOUR_EMAIL_HERE@example.com</span> in the form's <span class="kbd">action</span> with your email to receive the posted data.</div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ========================================
+         LIVE PROFILE PREVIEW SECTION - Shows the profile as they type
+         ======================================== -->
+    <section class="card" aria-labelledby="profileTitle" id="profileSection">
+      <div class="content">
+        <h2 id="profileTitle">Generated Staff Profile</h2>
+        <div class="profile" id="profile">
+          
+          <!-- Profile sidebar - Photo and basic info on the left -->
+          <div>
+            <div class="avatar" id="avatarBox"><span class="subtle">Photo preview</span></div>
+            <div class="divider"></div>
+            <div class="stat" id="statusLine">Status: <span class="pill" id="statusOut">—</span></div>
+            <div class="stat" id="deptLine">Department: <span class="pill" id="departmentOut">—</span></div>
+            <div class="stat" id="idLine">Staff Code/ID: <span class="pill" id="staffIdOut">—</span></div>
+          </div>
+          
+          <!-- Main profile content - All the details on the right -->
+          <div>
+            <h3 id="nameOut" style="margin:0 0 4px">Your Name</h3>
+            <div class="subtle" id="leadershipOut">—</div>
+            <div class="divider"></div>
+
+            <!-- About section - Their personal statement -->
+            <section aria-labelledby="aboutTitle">
+              <h3 id="aboutTitle" style="margin:0 0 6px">About Me</h3>
+              <p id="bioOut" class="subtle">Your personal statement will appear here.</p>
+            </section>
+
+            <!-- Areas of specialization - The tags they added -->
+            <section style="margin-top:14px" aria-labelledby="areasTitle">
+              <h3 id="areasTitle" style="margin:0 0 6px">Areas of Specialization</h3>
+              <div class="list" id="areasOut"></div>
+            </section>
+
+            <!-- Professional skills - The skill bars I made -->
+            <section style="margin-top:14px" aria-labelledby="skillsTitle">
+              <h3 id="skillsTitle" style="margin:0 0 6px">Professional Skills</h3>
+              <div id="skillsOut"></div>
+            </section>
+
+            <!-- Education information - Where they went to school -->
+            <section style="margin-top:14px" aria-labelledby="eduTitle">
+              <h3 id="eduTitle" style="margin:0 0 6px">Education</h3>
+              <div id="eduOut" class="subtle">—</div>
+            </section>
+
+            <!-- Motivation responses - Their answers to the motivation questions -->
+            <section style="margin-top:14px" aria-labelledby="motTitle">
+              <h3 id="motTitle" style="margin:0 0 6px">Motivation</h3>
+              <ul id="motOut" class="subtle" style="padding-left:18px; margin:0">
+                <li id="motGroupOut">—</li>
+                <li id="motResearchOut">—</li>
+                <li id="motExperienceOut">—</li>
+              </ul>
+            </section>
+
+            <!-- Personal hobbies - The hobby tags -->
+            <section style="margin-top:14px" aria-labelledby="hobbyTitle">
+              <h3 id="hobbyTitle" style="margin:0 0 6px">Hobbies</h3>
+              <div class="list" id="hobbyOut"></div>
+            </section>
+
+            <!-- Social media links - All their social platforms -->
+            <section style="margin-top:14px" aria-labelledby="socialTitle">
+              <h3 id="socialTitle" style="margin:0 0 6px">Social Media Handles</h3>
+              <div class="socials" id="socialOut"></div>
+            </section>
+
+            <!-- Contact information footer - Phone and email -->
+            <footer>
+              <strong>Contact:</strong>
+              <span id="phoneOut" style="margin-left:8px">—</span>
+              <span style="margin:0 8px">•</span>
+              <a id="emailOut" href="#" style="color:var(--text); text-decoration:underline">—</a>
+            </footer>
+          </div>
+        </div>
+
+        <!-- Profile action buttons - Back to form and open welcome page -->
+        <div class="divider"></div>
+        <div class="toolbar">
+          <button class="btn ghost" id="jumpTop">↑ Back to Form</button>
+          <button class="btn primary" id="openWelcome">Open Welcome Address Page</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         WELCOME ADDRESS PREVIEW SECTION - For leaders only
+         ======================================== -->
+    <section class="card" id="welcomeInline">
+      <div class="content">
+        <h2>Welcome Address – Head/Leader</h2>
+        <div id="welcomePreview" class="subtle">Select a Leadership Position and write a Welcome Address to generate this page.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- My JavaScript file - this makes everything interactive -->
+  <script src="script.js"></script>
+</body>
+</html>
